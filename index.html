@@ -6,11 +6,12 @@
   <title>iPhone Simulator Ultimate Fixed</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #e9edf2; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: grid; place-items: center; min-height: 100vh; padding: 16px; color: #171717; }
-    .phone { width: min(390px, 100%); height: min(844px, calc(100dvh - 32px)); min-height: 650px; background: #111; border: 7px solid #222; border-radius: 48px; padding: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; }
+    body { background: #e9edf2; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: grid; place-items: center; min-height: 100vh; padding: 16px; color: #171717; user-select: none; }
+    .phone { width: min(390px, 100%); height: min(844px, calc(100dvh - 32px)); min-height: 650px; background: #111; border: 7px solid #222; border-radius: 48px; padding: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
     .screen { height: 100%; border-radius: 34px; overflow: hidden; position: relative; background: #fff; display: flex; flex-direction: column; }
     .status { position: absolute; top: 0; left: 0; right: 0; height: 34px; padding: 9px 22px; z-index: 1000; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #fff; pointer-events: none; mix-blend-mode: difference; }
-    .island { position: absolute; z-index: 1001; top: 7px; left: 50%; transform: translateX(-50%); height: 25px; width: 100px; background: #050505; border-radius: 20px; }
+    .island { position: absolute; z-index: 1001; top: 7px; left: 50%; transform: translateX(-50%); height: 25px; width: 100px; background: #050505; border-radius: 20px; transition: width 0.3s, height: 0.3s; cursor: pointer; }
+    .island.expand { width: 180px; height: 35px; }
     .home { position: absolute; inset: 0; padding: 54px 17px 25px; background: linear-gradient(140deg, #1f1c2c, #928dab); display: flex; flex-direction: column; z-index: 5; }
     .clock { font-size: 54px; font-weight: 300; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); margin-left: 8px; text-align: left; }
     .date { color: white; font-weight: 650; text-shadow: 0 1px 5px rgba(0,0,0,0.4); margin: 0 0 auto 8px; font-size: 16px; }
@@ -19,23 +20,26 @@
     .widget b { display: block; font-size: 13px; margin-bottom: 5px; }
     .apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 8px; margin-bottom: 15px; overflow-y: auto; }
     .app { border: 0; background: none; color: white; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); cursor: pointer; min-width: 0; }
-    .appicon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; box-shadow: 0 3px 8px rgba(0,0,0,0.15); overflow: hidden; background-color: #fff; }
+    .appicon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; box-shadow: 0 3px 8px rgba(0,0,0,0.15); overflow: hidden; background-color: #fff; transition: transform 0.1s; }
+    .app:active .appicon { transform: scale(0.92); }
     .dock { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: auto; background: rgba(255,255,255,0.4); backdrop-filter: blur(18px); padding: 10px; border-radius: 25px; }
     .dock .appicon { width: 46px; height: 46px; font-size: 22px; cursor: pointer; }
-    .homebar { position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); height: 4px; width: 110px; background: #111; border-radius: 4px; z-index: 2000; cursor: pointer; }
+    .homebar { position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); height: 4px; width: 110px; background: #fff; border-radius: 4px; z-index: 2000; cursor: pointer; }
     .app-layer { display: none; flex-direction: column; height: 100%; background: #fff; position: absolute; inset: 0; z-index: 15; color: #000; }
     .app-layer.active { display: flex; }
     .app-header { padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 0.5px solid #e5e5e5; background: #f9f9f9; flex-shrink: 0; font-weight: bold; }
-    .app-body { flex: 1; overflow-y: auto; background: #fff; }
+    .app-body { flex: 1; overflow-y: auto; background: #fff; position: relative; }
     .back-btn { background: none; border: 0; color: #007aff; font-size: 15px; cursor: pointer; padding: 0; font-weight: 500; }
 
     /* 1. 잠금화면 및 패스코드 보정 */
     .lockscreen { position: absolute; inset: 0; background: linear-gradient(200deg, #0f2027, #203a43, #2c5364); z-index: 500; display: flex; flex-direction: column; padding: 60px 24px 40px; color: #fff; transition: transform 0.4s ease-out; cursor: pointer; }
+    .lockscreen.hide { transform: translateY(-100%); pointer-events: none; }
     .lock-time { font-size: 64px; font-weight: 200; text-align: center; margin-bottom: 2px; }
     .lock-date { font-size: 18px; font-weight: 400; text-align: center; opacity: 0.9; margin-bottom: auto; }
     .swipe-up-hint { text-align: center; font-size: 13px; animation: bounce 2s infinite; opacity: 0.8; margin-bottom: 20px; font-weight: bold; color: #ff9f0a; }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px); } 60% { transform: translateY(-4px); } }
     .passcode-screen { position: absolute; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 501; display: none; flex-direction: column; align-items: center; justify-content: center; color: white; }
+    .passcode-screen.active { display: flex; }
     .passcode-dots { display: flex; gap: 16px; margin: 24px 0 40px; }
     .dot { width: 12px; height: 12px; border: 1.5px solid #fff; border-radius: 50%; transition: background 0.1s; }
     .dot.filled { background: #fff; }
@@ -44,7 +48,7 @@
     .passcode-btn:active { background: rgba(255,255,255,0.4); }
 
     /* 무신사 */
-    .m-header-bar { background: #000; color: #fff; padding: 45px 16px 10px; display: flex; justify-content: space-between; font-weight: bold; }
+    .m-header-bar { background: #000; color: #fff; padding: 45px 16px 10px; display: flex; justify-content: space-between; font-weight: bold; align-items: center; }
     .m-banner { width: 100%; height: 120px; background: #111; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; font-weight: bold; font-size: 15px; }
     .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; }
     .m-item { border: 1px solid #eee; border-radius: 10px; padding: 10px; font-size: 12px; }
@@ -54,35 +58,43 @@
     /* 메모장 */
     .notes-list { padding: 12px; }
     .note-item { background: #f8f9fa; border-radius: 12px; padding: 14px; margin-bottom: 10px; cursor: pointer; border: 0.5px solid #eee; }
-    .note-editor { display: none; flex-direction: column; height: 100%; background: #fff; padding: 16px; }
+    .note-editor { display: none; flex-direction: column; height: 100%; background: #fff; padding: 16px; position: absolute; inset: 0; z-index: 5; }
+    .note-editor.active { display: flex; }
     .note-input-title { font-size: 22px; font-weight: bold; border: 0; outline: none; width: 100%; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
     .note-input-content { font-size: 15px; border: 0; outline: none; width: 100%; flex: 1; resize: none; }
 
     /* 전화 */
     .p-display { font-size: 34px; text-align: center; padding: 25px 0; height: 80px; font-weight: 300; letter-spacing: 1px; }
-    .p-grid { display: grid; grid-template-columns: repeat(3, 72px); gap: 14px; justify-content: center; }
+    .p-grid { display: grid; grid-template-columns: repeat(3, 72px); gap: 14px; justify-content: center; margin-top: 10px; }
     .p-btn { width: 72px; height: 72px; border-radius: 50%; background: #f2f2f7; border: 0; font-size: 26px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .p-btn:active { background: #e5e5ea; }
     .p-btn small { font-size: 9px; color: #555; font-weight: bold; margin-top: -2px; }
 
     /* 카카오톡 */
-    .k-header { background: #fee500; color: #1e1e1e; padding: 45px 16px 10px; display: flex; justify-content: space-between; }
-    .k-item { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 0.5px solid #f2f2f2; cursor: pointer; }
-    .k-avatar { width: 46px; height: 46px; border-radius: 18px; background: #ff9f0a; display: grid; place-items: center; font-size: 22px; }
-    .k-room { display: none; flex-direction: column; height: 100%; background: #bacbc7; }
+    .k-header { background: #fee500; color: #1e1e1e; padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+    .k-item { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 0.5px solid #f2f2f2; cursor: pointer; align-items: center; }
+    .k-avatar { width: 46px; height: 46px; border-radius: 18px; background: #ff9f0a; display: grid; place-items: center; font-size: 22px; color: #fff; }
+    .k-room { display: none; flex-direction: column; height: 100%; background: #bacbc7; position: absolute; inset: 0; z-index: 5; }
+    .k-room.active { display: flex; }
     .k-chat-scroller { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .k-bubble { background: #fff; padding: 9px 12px; border-radius: 12px; max-width: 75%; font-size: 14px; align-self: flex-start; }
+    .k-bubble { background: #fff; padding: 9px 12px; border-radius: 12px; max-width: 75%; font-size: 14px; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
     .k-bubble.mine { background: #fee500; align-self: flex-end; }
-    .k-input-area { background: #fff; padding: 8px 12px; display: flex; gap: 8px; border-top: 0.5px solid #ccc; }
+    .k-input-area { background: #fff; padding: 8px 12px; display: flex; gap: 8px; border-top: 0.5px solid #ccc; align-items: center; }
+    .k-input-area input { flex: 1; border: 1px solid #ddd; border-radius: 18px; padding: 8px 12px; outline: none; font-size: 14px; }
+    .k-input-area button { background: #fee500; border: 0; font-weight: bold; padding: 8px 14px; border-radius: 18px; cursor: pointer; }
 
     /* 시계 */
     .sw-view { background: #000; color: #fff; height: 100%; display: flex; flex-direction: column; }
     .sw-timer { font-size: 56px; font-family: monospace; text-align: center; padding: 50px 0; }
+    .sw-controls { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
+    .sw-btn { width: 70px; height: 70px; border-radius: 50%; border: 0; font-weight: bold; cursor: pointer; font-size: 14px; }
     .sw-row { display: flex; justify-content: space-between; padding: 12px 16px; border-bottom: 0.5px solid #222; font-size: 14px; color: #ccc; }
 
     /* 캘린더 */
     .cal-container { padding: 12px; }
     .cal-matrix { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; margin-top: 10px; }
     .cal-cell { padding: 10px 0; font-size: 13px; cursor: pointer; border-radius: 8px; }
+    .cal-cell:hover { background: #f2f2f7; }
     .cal-cell.active-day { background: #ff3b30 !important; color: #fff !important; font-weight: bold; }
 
     /* 카메라 */
@@ -90,7 +102,533 @@
     .camera-lens { flex: 1; background: #111; display: grid; place-items: center; font-size: 15px; text-align: center; color: #aaa; position: relative; overflow: hidden; }
     .camera-flash-overlay { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
     .camera-dashboard { height: 120px; background: #000; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
+    .cam-shutter { width: 64px; height: 64px; border-radius: 50%; background: #fff; border: 4px solid #333; cursor: pointer; }
     .cam-gallery-preview { width: 45px; height: 45px; border-radius: 8px; background: #333; overflow: hidden; display: grid; place-items: center; font-size: 20px; border: 1px solid rgba(255,255,255,0.3); }
 
     /* 인스타그램 */
     .i-story-tray { display: flex; gap: 12px; padding: 12px; border-bottom: 0.5px solid #dbdbdb; overflow-x: auto; }
+    .i-story { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; cursor: pointer; }
+    .i-story-ring { width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(45s, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); padding: 2px; display: grid; place-items: center; }
+    .i-story-avatar { width: 56px; height: 56px; border-radius: 50%; background: #ddd; display: grid; place-items: center; font-size: 24px; border: 2px solid #fff; }
+    .i-post { border-bottom: 0.5px solid #dbdbdb; margin-bottom: 12px; }
+    .i-post-header { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-weight: bold; font-size: 13px; }
+    .i-post-img { width: 100%; height: 260px; background: #efefef; display: grid; place-items: center; font-size: 40px; }
+    .i-post-actions { padding: 8px 12px; display: flex; gap: 12px; font-size: 20px; }
+    .i-post-caption { padding: 0 12px 12px; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+    <div class="screen">
+      <!-- 상태표시줄 & 다이나믹 아일랜드 -->
+      <div class="status">
+        <span id="status-time">9:41</span>
+        <span>5G 🔋</span>
+      </div>
+      <div class="island" id="dynamic-island" onclick="toggleIsland()"></div>
+
+      <!-- 잠금화면 -->
+      <div class="lockscreen" id="lockscreen" onclick="showPasscode()">
+        <div class="lock-time" id="lock-time-el">09:41</div>
+        <div class="lock-date" id="lock-date-el">10월 18일 일요일</div>
+        <div class="swipe-up-hint">▲ 위로 밀어서 잠금 해제</div>
+      </div>
+
+      <!-- 패스코드 화면 -->
+      <div class="passcode-screen" id="passcode-screen">
+        <div style="font-size: 16px; font-weight: 500;">암호 입력</div>
+        <div class="passcode-dots">
+          <div class="dot" id="dot-0"></div>
+          <div class="dot" id="dot-1"></div>
+          <div class="dot" id="dot-2"></div>
+          <div class="dot" id="dot-3"></div>
+        </div>
+        <div class="passcode-grid">
+          <button class="passcode-btn" onclick="pressPass(1)">1</button>
+          <button class="passcode-btn" onclick="pressPass(2)">2</button>
+          <button class="passcode-btn" onclick="pressPass(3)">3</button>
+          <button class="passcode-btn" onclick="pressPass(4)">4</button>
+          <button class="passcode-btn" onclick="pressPass(5)">5</button>
+          <button class="passcode-btn" onclick="pressPass(6)">6</button>
+          <button class="passcode-btn" onclick="pressPass(7)">7</button>
+          <button class="passcode-btn" onclick="pressPass(8)">8</button>
+          <button class="passcode-btn" onclick="pressPass(9)">9</button>
+          <div style="grid-column: 2;">
+            <button class="passcode-btn" onclick="pressPass(0)">0</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 홈 화면 -->
+      <div class="home">
+        <div class="clock" id="home-clock">09:41</div>
+        <div class="date" id="home-date">10월 18일 일요일</div>
+        
+        <div class="widgetrow">
+          <div class="widget">
+            <b>날씨 ☀️</b>
+            울산광역시 21°C<br>맑음, 미세먼지 좋음
+          </div>
+          <div class="widget" onclick="openApp('calendar-app')">
+            <b>캘린더 📅</b>
+            오늘 주요 일정 없음<br>편안한 휴일 보내세요!
+          </div>
+        </div>
+
+        <div class="apps">
+          <button class="app" onclick="openApp('musinsa-app')">
+            <div class="appicon" style="background:#000; color:#fff;">🛍️</div>무신사
+          </button>
+          <button class="app" onclick="openApp('notes-app')">
+            <div class="appicon" style="background:#ff9f0a; color:#fff;">📝</div>메모
+          </button>
+          <button class="app" onclick="openApp('phone-app')">
+            <div class="appicon" style="background:#34c759; color:#fff;">📞</div>전화
+          </button>
+          <button class="app" onclick="openApp('kakaotalk-app')">
+            <div class="appicon" style="background:#fee500;">💬</div>카카오톡
+          </button>
+          <button class="app" onclick="openApp('clock-app')">
+            <div class="appicon" style="background:#1c1c1e; color:#fff;">⏰</div>시계
+          </button>
+          <button class="app" onclick="openApp('calendar-app')">
+            <div class="appicon" style="background:#ff3b30; color:#fff;">📅</div>캘린더
+          </button>
+          <button class="app" onclick="openApp('camera-app')">
+            <div class="appicon" style="background:#8e8e93; color:#fff;">📷</div>카메라
+          </button>
+          <button class="app" onclick="openApp('insta-app')">
+            <div class="appicon" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888); color:#fff;">📸</div>인스타
+          </button>
+        </div>
+
+        <div class="dock">
+          <div class="appicon" style="background:#007aff; color:#fff;" onclick="openApp('phone-app')">📞</div>
+          <div class="appicon" style="background:#34c759; color:#fff;" onclick="openApp('kakaotalk-app')">💬</div>
+          <div class="appicon" style="background:#ff9500; color:#fff;" onclick="openApp('notes-app')">📝</div>
+          <div class="appicon" style="background:#5856d6; color:#fff;" onclick="openApp('musinsa-app')">🛍️</div>
+        </div>
+      </div>
+
+      <!-- 홈 바 -->
+      <div class="homebar" onclick="goHome()"></div>
+
+      <!-- ================= APPS ================= -->
+
+      <!-- 무신사 앱 -->
+      <div class="app-layer" id="musinsa-app">
+        <div class="m-header-bar">
+          <span>MUSINSA</span>
+          <button class="back-btn" onclick="closeApp('musinsa-app')">닫기</button>
+        </div>
+        <div class="app-body">
+          <div class="m-banner">AUTUMN SPECIAL SALE<br><span style="font-size:12px; opacity:0.8;">전 상품 최대 80% 할인</span></div>
+          <div class="m-grid">
+            <div class="m-item">
+              <div class="m-item-img">🧥</div>
+              <b>오버사이즈 울 코트</b>
+              <p style="color:#888;">189,000원</p>
+              <button class="m-buy-btn" onclick="alert('구매가 완료되었습니다!')">구매하기</button>
+            </div>
+            <div class="m-item">
+              <div class="m-item-img">👖</div>
+              <b>와이드 데님 팬츠</b>
+              <p style="color:#888;">59,000원</p>
+              <button class="m-buy-btn" onclick="alert('구매가 완료되었습니다!')">구매하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 메모장 앱 -->
+      <div class="app-layer" id="notes-app">
+        <div class="app-header">
+          <span>메모</span>
+          <button class="back-btn" onclick="closeApp('notes-app')">완료</button>
+        </div>
+        <div class="app-body">
+          <div class="notes-list" id="notes-list-view">
+            <div style="font-weight:bold; margin-bottom:8px;">기본 메모</div>
+            <div class="note-item" onclick="openNoteEditor('장보기 목록', '우유, 계란, 닭가슴살, 프로틴')">
+              <b>장보기 목록</b>
+              <p style="font-size:12px; color:#666;">우유, 계란, 닭가슴살...</p>
+            </div>
+            <div class="note-item" onclick="openNoteEditor('프로젝트 아이디어', '아이폰 시뮬레이터 웹으로 구현하기 완성도 높이기!')">
+              <b>프로젝트 아이디어</b>
+              <p style="font-size:12px; color:#666;">아이폰 시뮬레이터 웹으로 구현하기...</p>
+            </div>
+          </div>
+          <div class="note-editor" id="note-editor-view">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <button class="back-btn" onclick="closeNoteEditor()">‹ 목록</button>
+              <button class="back-btn" onclick="closeNoteEditor()">저장</button>
+            </div>
+            <input type="text" class="note-input-title" id="note-title-input" placeholder="제목">
+            <textarea class="note-input-content" id="note-content-input" placeholder="메모를 입력하세요..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- 전화 앱 -->
+      <div class="app-layer" id="phone-app">
+        <div class="app-header">
+          <span>전화</span>
+          <button class="back-btn" onclick="closeApp('phone-app')">닫기</button>
+        </div>
+        <div class="app-body" style="display:flex; flex-direction:column; justify-content:center; padding: 20px;">
+          <div class="p-display" id="phone-number-display"></div>
+          <div class="p-grid">
+            <button class="p-btn" onclick="pressPhone('1')">1</button>
+            <button class="p-btn" onclick="pressPhone('2')">2<small>ABC</small></button>
+            <button class="p-btn" onclick="pressPhone('3')">3<small>DEF</small></button>
+            <button class="p-btn" onclick="pressPhone('4')">4<small>GHI</small></button>
+            <button class="p-btn" onclick="pressPhone('5')">5<small>JKL</small></button>
+            <button class="p-btn" onclick="pressPhone('6')">6<small>MNO</small></button>
+            <button class="p-btn" onclick="pressPhone('7')">7<small>PQRS</small></button>
+            <button class="p-btn" onclick="pressPhone('8')">8<small>TUV</small></button>
+            <button class="p-btn" onclick="pressPhone('9')">9<small>WXYZ</small></button>
+            <button class="p-btn" onclick="pressPhone('*')">*</button>
+            <button class="p-btn" onclick="pressPhone('0')">0<small>+</small></button>
+            <button class="p-btn" onclick="pressPhone('#')">#</button>
+          </div>
+          <div style="text-align:center; margin-top: 24px;">
+            <button style="width:64px; height:64px; border-radius:50%; background:#34c759; color:#fff; border:0; font-size:24px; cursor:pointer;" onclick="makeCall()">📞</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 카카오톡 앱 -->
+      <div class="app-layer" id="kakaotalk-app">
+        <div class="k-header">
+          <span>채팅</span>
+          <button class="back-btn" onclick="closeApp('kakaotalk-app')">닫기</button>
+        </div>
+        <div class="app-body" style="position:relative;">
+          <div id="chat-list">
+            <div class="k-item" onclick="openChatRoom('AI 어시스턴트')">
+              <div class="k-avatar">🤖</div>
+              <div>
+                <b>AI 어시스턴트</b>
+                <p style="font-size:12px; color:#666;">무엇을 도와드릴까요?</p>
+              </div>
+            </div>
+            <div class="k-item" onclick="openChatRoom('엄마')">
+              <div class="k-avatar" style="background:#ff3b30;">👩</div>
+              <div>
+                <b>엄마</b>
+                <p style="font-size:12px; color:#666;">밥 잘 먹고 다니렴~</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 채팅방 세부 -->
+          <div class="k-room" id="k-room-view">
+            <div class="app-header" style="background:#fee500;">
+              <button class="back-btn" onclick="closeChatRoom()" style="color:#000;">‹ 뒤로</button>
+              <span id="k-room-title">채팅방</span>
+              <span></span>
+            </div>
+            <div class="k-chat-scroller" id="k-chat-messages">
+              <div class="k-bubble">안녕하세요! 오늘 하루도 좋은 하루 보내세요. 😊</div>
+            </div>
+            <div class="k-input-area">
+              <input type="text" id="k-msg-input" placeholder="메시지 입력..." onkeypress="if(event.key==='Enter') sendChatMsg()">
+              <button onclick="sendChatMsg()">전송</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 시계 앱 -->
+      <div class="app-layer" id="clock-app">
+        <div class="app-header" style="background:#1c1c1e; color:#fff;">
+          <span style="color:#fff;">스톱워치</span>
+          <button class="back-btn" style="color:#ff9f0a;" onclick="closeApp('clock-app')">완료</button>
+        </div>
+        <div class="sw-view">
+          <div class="sw-timer" id="sw-display">00:00.00</div>
+          <div class="sw-controls">
+            <button class="sw-btn" style="background:#333; color:#fff;" onclick="resetStopwatch()">재설정</button>
+            <button class="sw-btn" style="background:#34c759; color:#fff;" onclick="toggleStopwatch()" id="sw-toggle-btn">시작</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 캘린더 앱 -->
+      <div class="app-layer" id="calendar-app">
+        <div class="app-header">
+          <span>2026년 10월</span>
+          <button class="back-btn" onclick="closeApp('calendar-app')">닫기</button>
+        </div>
+        <div class="app-body cal-container">
+          <div style="display:grid; grid-template-columns:repeat(7,1fr); text-align:center; font-weight:bold; font-size:12px; color:#888;">
+            <div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>
+          </div>
+          <div class="cal-matrix" id="cal-matrix-grid">
+            <!-- 동적 생성 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 카메라 앱 -->
+      <div class="app-layer" id="camera-app">
+        <div class="camera-box">
+          <div style="padding: 20px 20px 0; display:flex; justify-content:space-between; align-items:center;">
+            <button style="background:none; border:0; color:#fff; font-size:20px; cursor:pointer;" onclick="triggerFlash()">⚡</button>
+            <button class="back-btn" style="color:#fff;" onclick="closeApp('camera-app')">닫기</button>
+          </div>
+          <div class="camera-lens" id="camera-lens-view">
+            <div class="camera-flash-overlay" id="cam-flash"></div>
+            📷<br><span style="font-size:12px; margin-top:6px;">탭하여 초점 맞추기</span>
+          </div>
+          <div class="camera-dashboard">
+            <div class="cam-gallery-preview">🖼️</div>
+            <button class="cam-shutter" onclick="takePhoto()"></button>
+            <div style="width:45px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 인스타그램 앱 -->
+      <div class="app-layer" id="insta-app">
+        <div class="app-header" style="background:#fff;">
+          <span style="font-family:serif; font-size:20px; font-style:italic;">Instagram</span>
+          <button class="back-btn" onclick="closeApp('insta-app')">닫기</button>
+        </div>
+        <div class="app-body">
+          <div class="i-story-tray">
+            <div class="i-story"><div class="i-story-ring"><div class="i-story-avatar">😎</div></div>내 스토리</div>
+            <div class="i-story"><div class="i-story-ring"><div class="i-story-avatar">👩‍💻</div></div>developer</div>
+            <div class="i-story"><div class="i-story-ring"><div class="i-story-avatar">☕</div></div>cafe_lover</div>
+            <div class="i-story"><div class="i-story-ring"><div class="i-story-avatar">✈️</div></div>traveler</div>
+          </div>
+          <div class="i-post">
+            <div class="i-post-header">
+              <div style="width:30px; height:30px; border-radius:50%; background:#ddd; display:grid; place-items:center;">😎</div>
+              <span>apple_user</span>
+            </div>
+            <div class="i-post-img">🌅</div>
+            <div class="i-post-actions">
+              <span>❤️</span><span>💬</span><span>✈️</span>
+            </div>
+            <div class="i-post-caption"><b>apple_user</b> 멋진 가을 주말 풍경 🍂</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 시계 및 날짜 업데이트 (현재 시각 2026년 기준)
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const timeStr = `${hours}:${minutes}`;
+
+      document.getElementById('status-time').innerText = timeStr;
+      document.getElementById('lock-time-el').innerText = timeStr;
+      document.getElementById('home-clock').innerText = timeStr;
+
+      const months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+      const days = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
+      const dateStr = `${months[now.getMonth()]} ${now.getDate()}일 ${days[now.getDay()]}`;
+
+      document.getElementById('lock-date-el').innerText = dateStr;
+      document.getElementById('home-date').innerText = dateStr;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // 잠금화면 & 패스코드 로직
+    let enteredPass = "";
+    const correctPass = "1234"; // 정답 패스코드
+
+    function showPasscode() {
+      document.getElementById('passcode-screen').classList.add('active');
+    }
+
+    function pressPass(n) {
+      if (enteredPass.length < 4) {
+        enteredPass += n;
+        updateDots();
+      }
+      if (enteredPass.length === 4) {
+        setTimeout(() => {
+          if (enteredPass === correctPass) {
+            document.getElementById('lockscreen').classList.add('hide');
+            document.getElementById('passcode-screen').classList.remove('active');
+          } else {
+            alert('암호가 틀렸습니다 (정답: 1234)');
+          }
+          enteredPass = "";
+          updateDots();
+        }, 150);
+      }
+    }
+
+    function updateDots() {
+      for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (i < enteredPass.length) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      }
+    }
+
+    // 앱 네비게이션
+    function openApp(appId) {
+      document.getElementById(appId).classList.add('active');
+    }
+
+    function closeApp(appId) {
+      document.getElementById(appId).classList.remove('active');
+    }
+
+    function goHome() {
+      document.querySelectorAll('.app-layer').forEach(layer => layer.classList.remove('active'));
+      document.getElementById('note-editor-view').classList.remove('active');
+      document.getElementById('k-room-view').classList.remove('active');
+    }
+
+    // 다이나믹 아일랜드 상호작용
+    function toggleIsland() {
+      const island = document.getElementById('dynamic-island');
+      island.classList.toggle('expand');
+      setTimeout(() => {
+        island.classList.remove('expand');
+      }, 2500);
+    }
+
+    // 메모장 상세 에디터
+    function openNoteEditor(title, content) {
+      document.getElementById('note-title-input').value = title;
+      document.getElementById('note-content-input').value = content;
+      document.getElementById('note-editor-view').classList.add('active');
+    }
+
+    function closeNoteEditor() {
+      document.getElementById('note-editor-view').classList.remove('active');
+    }
+
+    // 전화번호 다이얼
+    let currentPhoneNum = "";
+    function pressPhone(char) {
+      currentPhoneNum += char;
+      document.getElementById('phone-number-display').innerText = currentPhoneNum;
+    }
+
+    function makeCall() {
+      if (!currentPhoneNum) {
+        alert('번호를 입력해주세요.');
+        return;
+      }
+      alert(`${currentPhoneNum} 번으로 통화를 연결합니다... 📞`);
+      currentPhoneNum = "";
+      document.getElementById('phone-number-display').innerText = "";
+    }
+
+    // 카카오톡 채팅방
+    function openChatRoom(name) {
+      document.getElementById('k-room-title').innerText = name;
+      document.getElementById('k-room-view').classList.add('active');
+    }
+
+    function closeChatRoom() {
+      document.getElementById('k-room-view').classList.remove('active');
+    }
+
+    function sendChatMsg() {
+      const input = document.getElementById('k-msg-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const scroller = document.getElementById('k-chat-messages');
+      const myBubble = document.createElement('div');
+      myBubble.className = 'k-bubble mine';
+      myBubble.innerText = text;
+      scroller.appendChild(myBubble);
+      input.value = "";
+      scroller.scrollTop = scroller.scrollHeight;
+
+      // 자동 응답
+      setTimeout(() => {
+        const replyBubble = document.createElement('div');
+        replyBubble.className = 'k-bubble';
+        replyBubble.innerText = "메시지를 확인했습니다! 👍";
+        scroller.appendChild(replyBubble);
+        scroller.scrollTop = scroller.scrollHeight;
+      }, 1000);
+    }
+
+    // 시계 스톱워치
+    let swInterval = null;
+    let swTime = 0;
+    let swRunning = false;
+
+    function toggleStopwatch() {
+      const btn = document.getElementById('sw-toggle-btn');
+      if (!swRunning) {
+        swRunning = true;
+        btn.innerText = "중단";
+        btn.style.background = "#ff3b30";
+        swInterval = setInterval(() => {
+          swTime += 10;
+          let mins = Math.floor(swTime / 60000);
+          let secs = Math.floor((swTime % 60000) / 1000);
+          let millis = Math.floor((swTime % 1000) / 10);
+          document.getElementById('sw-display').innerText = 
+            `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}.${String(millis).padStart(2,'0')}`;
+        }, 10);
+      } else {
+        swRunning = false;
+        btn.innerText = "시작";
+        btn.style.background = "#34c759";
+        clearInterval(swInterval);
+      }
+    }
+
+    function resetStopwatch() {
+      swRunning = false;
+      clearInterval(swInterval);
+      swTime = 0;
+      document.getElementById('sw-display').innerText = "00:00.00";
+      const btn = document.getElementById('sw-toggle-btn');
+      btn.innerText = "시작";
+      btn.style.background = "#34c759";
+    }
+
+    // 캘린더 날짜 생성
+    const calGrid = document.getElementById('cal-matrix-grid');
+    for (let i = 1; i <= 31; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      cell.innerText = i;
+      if (i === 18) {
+        cell.classList.add('active-day');
+      }
+      calGrid.appendChild(cell);
+    }
+
+    // 카메라 기능
+    function triggerFlash() {
+      const flash = document.getElementById('cam-flash');
+      flash.style.opacity = '1';
+      setTimeout(() => {
+        flash.style.opacity = '0';
+      }, 200);
+    }
+
+    function takePhoto() {
+      triggerFlash();
+      setTimeout(() => {
+        alert('사진이 앨범에 저장되었습니다! 📸');
+      }, 150);
+    }
+  </script>
+</body>
+</html>
