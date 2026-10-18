@@ -1,30 +1,30 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>iPhone 시뮬레이터</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#e9edf2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:grid;place-items:center;min-height:100vh;padding:16px;color:#171717}.phone{width:min(390px,100%);height:min(844px,calc(100dvh - 32px));min-height:600px;background:#111;border:7px solid #222;border-radius:48px;padding:8px;box-shadow:0 20px 60px #0003}.screen{height:100%;border-radius:34px;overflow:hidden;position:relative;background:#fff}.status{position:absolute;top:0;left:0;right:0;height:34px;padding:9px 22px;z-index:100;display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#111;pointer-events:none}.island{position:absolute;z-index:101;top:7px;left:50%;transform:translateX(-50%);height:25px;width:100px;background:#050505;border-radius:20px}.home{position:absolute;inset:0;padding:54px 17px 25px;background:linear-gradient(#0002,#0000 28%,#0003),url('dog.jpg') center/cover no-repeat,linear-gradient(140deg,#b6d9f0,#d7b8a3);display:flex;flex-direction:column}.clock{font-size:54px;font-weight:300;color:white;text-shadow:0 2px 8px #0006;margin-left:8px}.date{color:white;font-weight:650;text-shadow:0 1px 5px #0006;margin:0 0 auto 10px}.widgetrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.widget{background:#ffffffc9;backdrop-filter:blur(10px);border-radius:18px;padding:11px;font-size:12px;min-height:78px}.widget b{display:block;font-size:13px;margin-bottom:5px}.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-bottom:15px;overflow-y:auto}.app{border:0;background:none;color:white;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;text-shadow:0 1px 4px #0009;cursor:pointer;min-width:0}.appicon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;box-shadow:0 3px 8px #0002;text-shadow:none;overflow:hidden;background-color:#fff}.appicon img{width:100%;height:100%;object-fit:cover}.dock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:auto;background:#ffffff70;backdrop-filter:blur(18px);padding:10px;border-radius:25px}.dock .appicon{width:46px;height:46px}.panel{display:none;position:absolute;inset:0;background:white;z-index:10;flex-direction:column}.panel.active{display:flex}.head{height:75px;flex-shrink:0;padding:40px 14px 8px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #eee}.back{border:0;background:none;color:#007aff;font-size:15px;cursor:pointer}.title{font-weight:750;text-align:center;flex:1;margin-right:42px}.content{overflow:auto;flex:1}.simple{padding:18px;font-size:14px;line-height:1.6}.bubble{padding:10px 13px;border-radius:17px;background:#f0f0f0;margin:10px 0;max-width:80%;font-size:13px}.mine{margin-left:auto;background:#1686ff;color:white}.chatbox{display:flex;padding:9px;gap:7px;border-top:1px solid #eee}.chatbox input{flex:1;min-width:0;border:1px solid #ddd;border-radius:20px;padding:10px}.chatbox button{border:0;background:#1686ff;color:#fff;border-radius:20px;padding:0 14px}.homebar{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);height:4px;width:110px;background:#111;border-radius:4px;z-index:200;cursor:pointer}
+*{box-sizing:border-box}body{margin:0;background:#e9edf2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:grid;place-items:center;min-height:100vh;padding:16px;color:#171717}.phone{width:min(390px,100%);height:min(844px,calc(100dvh - 32px));min-height:600px;background:#111;border:7px solid #222;border-radius:48px;padding:8px;box-shadow:0 20px 60px #0003}.screen{height:100%;border-radius:34px;overflow:hidden;position:relative;background:#fff}.status{position:absolute;top:0;left:0;right:0;height:34px;padding:9px 22px;z-index:100;display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#111;pointer-events:none}.island{position:absolute;z-index:101;top:7px;left:50%;transform:translateX(-50%);height:25px;width:100px;background:#050505;border-radius:20px}.home{position:absolute;inset:0;padding:54px 17px 25px;background:linear-gradient(#0002,#0000 28%,#0003),url('dog.jpg') center/cover no-repeat,linear-gradient(140deg,#b6d9f0,#d7b8a3);display:flex;flex-direction:column}.clock{font-size:54px;font-weight:300;color:white;text-shadow:0 2px 8px #0006;margin-left:8px}.date{color:white;font-weight:650;text-shadow:0 1px 5px #0006;margin:0 0 auto 10px}.widgetrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.widget{background:#ffffffc9;backdrop-filter:blur(10px);border-radius:18px;padding:11px;font-size:12px;min-height:78px}.widget b{display:block;font-size:13px;margin-bottom:5px}.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-bottom:15px;overflow-y:auto}.app{border:0;background:none;color:white;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;text-shadow:0 1px 4px #0009;cursor:pointer;min-width:0}.appicon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;box-shadow:0 3px 8px #0002;text-shadow:none;overflow:hidden;background-color:#fff}.appicon img{width:100%;height:100%;object-fit:cover}.dock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:auto;background:#ffffff70;backdrop-filter:blur(18px);padding:10px;border-radius:25px}.dock .appicon{width:46px;height:46px}.panel{display:none;position:absolute;inset:0;background:white;z-index:10;flex-direction:column}.panel.active{display:flex}.head{height:75px;flex-shrink:0;padding:40px 14px 8px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #eee}.back{border:0;background:none;color:#007aff;font-size:15px;cursor:pointer}.title{font-weight:750;text-align:center;flex:1;margin-right:42px}.content{overflow:auto;flex:1}.simple{padding:18px;font-size:14px;line-height:1.6}.homebar{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);height:4px;width:110px;background:#111;border-radius:4px;z-index:200;cursor:pointer}
 
-/* 1. 메모 앱 (사진 1, 2) */
-.notes-app { display: flex; flex-direction: column; height: 100%; background: #f2f2f7; }
-.notes-header { padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; }
+/* 메모 앱 */
+.notes-app { display: flex; flex-direction: column; height: 100%; background: #f2f2f7; position: absolute; inset: 0; z-index: 15; }
+.notes-header { padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; background: #f2f2f7; }
 .notes-title { font-size: 28px; font-weight: bold; margin-top: 5px; }
 .notes-count { font-size: 12px; color: #8e8e93; }
-.notes-card-list { padding: 12px 16px; flex: 1; overflow-y: auto; }
+.notes-card-list { padding: 12px 16px; flex: 1; overflow-y: auto; background: #f2f2f7; }
 .notes-card { background: #fff; border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
 .notes-card-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
 .notes-card-sub { font-size: 13px; color: #8e8e93; }
 .notes-search-bar { padding: 8px 16px 16px; background: #f2f2f7; display: flex; gap: 8px; }
 .notes-search-input { flex: 1; background: #e3e3e8; border: 0; border-radius: 10px; padding: 8px 12px; font-size: 14px; outline: none; }
 .notes-new-btn { width: 36px; height: 36px; border-radius: 50%; background: #fff; border: 0; display: grid; place-items: center; font-size: 18px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
-.note-detail { display: none; flex-direction: column; height: 100%; background: #fff; }
+.note-detail { display: none; flex-direction: column; height: 100%; background: #fff; position: absolute; inset: 0; z-index: 20; }
 .note-detail.active { display: flex; }
-.note-detail-top { padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; }
+.note-detail-top { padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; background: #fff; }
 .note-detail-body { flex: 1; padding: 10px 20px; overflow-y: auto; outline: none; }
 .note-detail-title { font-size: 26px; font-weight: bold; border: 0; outline: none; width: 100%; margin-bottom: 15px; }
 .checklist-item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 16px; }
 .check-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ccc; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; color: transparent; flex-shrink: 0; }
 .check-circle.checked { background: #e5a93c; border-color: #e5a93c; color: #fff; }
 
-/* 2. 카메라 앱 (사진 3) */
+/* 카메라 앱 */
 .camera-app { height: 100%; background: #000; color: #fff; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
 .camera-top { padding: 40px 20px 10px; display: flex; justify-content: flex-end; gap: 15px; font-size: 18px; z-index: 2; }
 .camera-viewfinder { flex: 1; margin: 10px 0; background: #111; position: relative; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -39,7 +39,7 @@
 .camera-mode-toggle { display: flex; gap: 20px; font-size: 13px; font-weight: 600; }
 .camera-mode-toggle span.active { color: #e5a93c; }
 
-/* 3. 시계 앱 (사진 4, 5, 6, 7) */
+/* 시계 앱 */
 .clock-app { height: 100%; background: #000; color: #fff; display: flex; flex-direction: column; }
 .clock-content { flex: 1; padding: 45px 16px 10px; overflow-y: auto; display: none; }
 .clock-content.active { display: block; }
@@ -51,265 +51,4 @@
 .stopwatch-btns { display: flex; justify-content: space-between; padding: 0 20px; }
 .sw-btn { width: 70px; height: 70px; border-radius: 50%; border: 0; color: white; font-weight: bold; cursor: pointer; }
 .alarm-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #222; }
-.alarm-time { font-size: 38px; font-weight: 300; }
-.alarm-sub { font-size: 12px; color: #888; }
-
-/* 4. 캘린더 앱 (사진 8) */
-.calendar-app { height: 100%; background: #fff; display: flex; flex-direction: column; }
-.cal-top { padding: 45px 16px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; }
-.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding: 10px 16px; text-align: center; font-size: 14px; }
-.cal-day-head { color: #8e8e93; font-size: 11px; margin-bottom: 5px; }
-.cal-date { padding: 8px 0; border-radius: 50%; }
-.cal-date.today { background: #ff3b30; color: white; font-weight: bold; }
-
-/* 5. 카카오톡 앱 */
-.katalk-app { height: 100%; background: #b2c7da; display: flex; flex-direction: column; }
-.katalk-head { padding: 40px 14px 10px; background: #a0b4c6; display: flex; align-items: center; justify-content: space-between; font-weight: bold; }
-
-@media(max-height:700px){.clock{font-size:44px}.widgetrow{margin:8px 0}.widget{min-height:65px}.apps{gap:10px 8px}.appicon{width:46px;height:46px}}
-</style></head><body><div class="phone"><div class="screen"><div class="status" id="statusHeader"><span id="statusTime">9:41</span><span>●●●　Wi-Fi　▰</span></div><div class="island"></div>
-
-<main class="home" id="home"><div class="clock" id="clock">9:41</div><div class="date" id="date">10월 18일 일요일</div><div class="widgetrow"><div class="widget"><b>☀️ 오늘의 날씨</b>맑음 · 19°<br>가벼운 외출하기 좋은 날</div><div class="widget"><b>📅 오늘</b>새로운 하루<br>차근차근 시작하기</div></div>
-<div class="apps">
-<button class="app" onclick="openPanel('notes')"><span class="appicon"><img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=150&q=80" alt="메모"></span>메모</button>
-<button class="app" onclick="openPanel('camera')"><span class="appicon"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=150&q=80" alt="카메라"></span>카메라</button>
-<button class="app" onclick="openPanel('clockApp')"><span class="appicon"><img src="https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=150&q=80" alt="시계"></span>시계</button>
-<button class="app" onclick="openPanel('calendarApp')"><span class="appicon"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=150&q=80" alt="달력"></span>달력</button>
-<button class="app" onclick="openPanel('katalk')"><span class="appicon" style="background:#fee500;color:#3c1e1e;font-weight:bold;font-size:18px">TALK</span>카카오톡</button>
-<button class="app" onclick="openPanel('photos')"><span class="appicon"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=150&q=80"></span>사진</button>
-<button class="app" onclick="openPanel('messages')"><span class="appicon"><img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=150&q=80"></span>메시지</button>
-<button class="app" onclick="openPanel('phone')"><span class="appicon"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=150&q=80"></span>전화</button>
-</div>
-<div class="dock">
-<button class="app" onclick="openPanel('phone')"><span class="appicon"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=150&q=80"></span></button>
-<button class="app" onclick="openPanel('safari')"><span class="appicon"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=150&q=80"></span></button>
-<button class="app" onclick="openPanel('katalk')"><span class="appicon" style="background:#fee500;color:#3c1e1e;font-weight:bold;font-size:16px">TALK</span></button>
-<button class="app" onclick="openPanel('photos')"><span class="appicon"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=150&q=80"></span></button>
-</div></main>
-
-<!-- 1. 메모 앱 (사진 1 목록 -> 사진 2 상세) -->
-<section class="panel" id="notes">
-  <div class="notes-app">
-    <!-- 메모 목록 화면 -->
-    <div id="notesListView" style="display:flex; flex-direction:column; height:100%;">
-      <div class="notes-header">
-        <button onclick="goHome()" class="back">〈 뒤로</button>
-        <span style="font-size:20px;">•••</span>
-      </div>
-      <div style="padding:0 16px;"><div class="notes-title">메모</div><div class="notes-count">1개의 메모</div><div style="font-size:14px; font-weight:bold; margin-top:15px; color:#8e8e93;">오늘</div></div>
-      <div class="notes-card-list">
-        <div class="notes-card" onclick="openNoteDetail('수학여행')">
-          <div class="notes-card-title">수학여행</div>
-          <div class="notes-card-sub">오후 8:19　칫솔, 충전기, 옷...</div>
-        </div>
-      </div>
-      <div class="notes-search-bar">
-        <input class="notes-search-input" placeholder="🔍 검색">
-        <button class="notes-new-btn" onclick="openNoteDetail('새 메모')">✏️</button>
-      </div>
-    </div>
-    <!-- 메모 상세 작성 화면 -->
-    <div class="note-detail" id="noteDetailView">
-      <div class="note-detail-top">
-        <button onclick="closeNoteDetail()" class="back">〈 메모</button>
-        <div style="display:flex; gap:16px; font-size:18px; color:#007aff;"><span>📤</span><span>•••</span></div>
-      </div>
-      <div class="note-detail-body">
-        <input class="note-detail-title" id="noteTitleInput" value="수학여행">
-        <div id="noteChecklistArea">
-          <div class="checklist-item"><span class="check-circle" onclick="toggleCheck(this)">✓</span><span contenteditable="true">칫솔</span></div>
-          <div class="checklist-item"><span class="check-circle" onclick="toggleCheck(this)">✓</span><span contenteditable="true">충전기</span></div>
-          <div class="checklist-item"><span class="check-circle" onclick="toggleCheck(this)">✓</span><span contenteditable="true">옷</span></div>
-          <div class="checklist-item"><span class="check-circle checked" onclick="toggleCheck(this)">✓</span><span contenteditable="true">수건</span></div>
-          <div class="checklist-item"><span class="check-circle checked" onclick="toggleCheck(this)">✓</span><span contenteditable="true">속옷</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. 카메라 앱 (사진 3 스타일) -->
-<section class="panel" id="camera">
-  <div class="camera-app">
-    <div class="camera-top"><span>⚡</span><span>LIVE</span><span>:::</span></div>
-    <div class="camera-viewfinder"><video id="video" autoplay playsinline></video></div>
-    <div class="camera-controls">
-      <div class="camera-zoom"><span>.5</span><span class="active">1x</span><span>2</span><span>5</span></div>
-      <div class="camera-shutter-row">
-        <div style="width:40px; height:40px; background:#222; border-radius:8px;"></div>
-        <button class="shutter-btn" onclick="takePhoto()"><div class="shutter-inner"></div></button>
-        <div style="width:40px; height:40px; border-radius:50%; background:#222; display:grid; place-items:center;">🔄</div>
-      </div>
-      <div class="camera-mode-toggle"><span>비디오</span><span class="active">사진</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 3. 시계 앱 (사진 4, 5, 6, 7) -->
-<section class="panel" id="clockApp">
-  <div class="clock-app">
-    <!-- 세계 시계 (사진 7) -->
-    <div class="clock-content active" id="clkWorld">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;"><button class="back" style="color:#e5a93c;">편집</button><span style="color:#e5a93c; font-size:22px;">＋</span></div>
-      <h1 style="font-size:30px; margin:0 0 20px;">세계 시계</h1>
-      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid #222; padding-bottom:15px;">
-        <div><div style="font-size:12px; color:#888;">오늘, +0시간</div><div style="font-size:24px; font-weight:bold;">서울</div></div>
-        <div style="font-size:36px; font-weight:200;">오후 <span id="worldClockTime">8:21</span></div>
-      </div>
-    </div>
-    <!-- 알람 (사진 6) -->
-    <div class="clock-content" id="clkAlarm">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"><button class="back" style="color:#e5a93c;">편집</button><span style="color:#e5a93c; font-size:22px;">＋</span></div>
-      <div class="alarm-row"><div><div class="alarm-time">오전 7:10</div><div class="alarm-sub">알람, 주중</div></div><input type="checkbox" checked style="accent-color:#34c759; transform:scale(1.4);"></div>
-      <div class="alarm-row"><div><div class="alarm-time">오전 7:20</div><div class="alarm-sub">알람, 주중</div></div><input type="checkbox" style="accent-color:#34c759; transform:scale(1.4);"></div>
-      <div class="alarm-row"><div><div class="alarm-time">오전 8:15</div><div class="alarm-sub">알람</div></div><input type="checkbox" checked style="accent-color:#34c759; transform:scale(1.4);"></div>
-    </div>
-    <!-- 스톱워치 (사진 5) -->
-    <div class="clock-content" id="clkStopwatch">
-      <div class="stopwatch-display" id="swDisplay">00:00.00</div>
-      <div class="stopwatch-btns">
-        <button class="sw-btn" style="background:#333; color:#aaa;" onclick="resetSW()">랩</button>
-        <button class="sw-btn" id="swStartBtn" style="background:#1c3d22; color:#30d158;" onclick="toggleSW()">시작</button>
-      </div>
-    </div>
-    <!-- 타이머 (사진 4) -->
-    <div class="clock-content" id="clkTimer">
-      <div style="display:flex; justify-content:space-between; align-items:center;"><button class="back" style="color:#e5a93c;">편집</button></div>
-      <h1 style="font-size:30px; margin:10px 0 30px;">타이머</h1>
-      <div style="text-align:center; font-size:24px; padding:30px 0; background:#111; border-radius:14px; margin-bottom:30px;">0시간 40분 0초</div>
-      <div style="display:flex; justify-content:space-between; padding:0 10px;">
-        <button class="sw-btn" style="background:#333; color:#aaa;">취소</button>
-        <button class="sw-btn" style="background:#1c3d22; color:#30d158;">시작</button>
-      </div>
-    </div>
-    <!-- 시계 하단 탭바 -->
-    <div class="clock-nav">
-      <button class="clock-tab active" onclick="switchClockTab('clkWorld', this)"><span class="icon">🌐</span>세계 시계</button>
-      <button class="clock-tab" onclick="switchClockTab('clkAlarm', this)"><span class="icon">⏰</span>알람</button>
-      <button class="clock-tab" onclick="switchClockTab('clkStopwatch', this)"><span class="icon">⏱️</span>스톱워치</button>
-      <button class="clock-tab" onclick="switchClockTab('clkTimer', this)"><span class="icon">⏲️</span>타이머</button>
-    </div>
-  </div>
-</section>
-
-<!-- 4. 캘린더 앱 (사진 8 스타일) -->
-<section class="panel" id="calendarApp">
-  <div class="calendar-app">
-    <div class="cal-top">
-      <button class="back" onclick="goHome()">〈 2026년</button>
-      <span style="font-size:24px;">11월</span>
-      <span style="color:#ff3b30; font-size:20px;">＋</span>
-    </div>
-    <div class="cal-grid">
-      <div class="cal-day-head">일</div><div class="cal-day-head">월</div><div class="cal-day-head">화</div><div class="cal-day-head">수</div><div class="cal-day-head">목</div><div class="cal-day-head">금</div><div class="cal-day-head">토</div>
-      <div class="cal-date">1</div><div class="cal-date">2</div><div class="cal-date">3</div><div class="cal-date">4</div><div class="cal-date">5</div><div class="cal-date">6</div><div class="cal-date">7</div>
-      <div class="cal-date">8</div><div class="cal-date">9</div><div class="cal-date">10</div><div class="cal-date">11</div><div class="cal-date">12</div><div class="cal-date">13</div><div class="cal-date">14</div>
-      <div class="cal-date">15</div><div class="cal-date">16</div><div class="cal-date">17</div><div class="cal-date today">18</div><div class="cal-date">19</div><div class="cal-date">20</div><div class="cal-date">21</div>
-      <div class="cal-date">22</div><div class="cal-date">23</div><div class="cal-date">24</div><div class="cal-date">25</div><div class="cal-date">26</div><div class="cal-date">27</div><div class="cal-date">28</div>
-    </div>
-    <div style="padding:15px; background:#f9f9f9; flex:1; border-top:1px solid #eee;">
-      <b>오늘 일정</b>
-      <div style="margin-top:8px; font-size:13px; color:#555;">📌 수학여행 준비물 점검하기</div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. 카카오톡 앱 -->
-<section class="panel" id="katalk">
-  <div class="katalk-app">
-    <div class="katalk-head"><button onclick="goHome()" style="border:0; background:none; font-size:16px;">〈</button><span>친구</span><span>🔍</span></div>
-    <div class="content simple" id="katalkChat">
-      <div class="bubble">수학여행 짐 다 쌌어?</div>
-      <div class="bubble mine">메모 앱에 체크리스트 정리하는 중!</div>
-    </div>
-    <div class="chatbox"><input id="katalkInput" placeholder="메시지 입력"><button style="background:#fee500; color:#3c1e1e; font-weight:bold;" onclick="sendKatalk()">전송</button></div>
-  </div>
-</section>
-
-<div class="homebar" onclick="goHome()"></div></div></div>
-
-<script>
-const panels=[...document.querySelectorAll('.panel')];
-function openPanel(id){
-  panels.forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('home').style.display='none';
-  if(id==='camera') startCamera();
-}
-function goHome(){
-  panels.forEach(p=>p.classList.remove('active'));
-  document.getElementById('home').style.display='flex';
-  stopCamera();
-}
-
-/* 메모 제어 */
-function openNoteDetail(title){
-  document.getElementById('noteTitleInput').value = title;
-  document.getElementById('noteDetailView').classList.add('active');
-}
-function closeNoteDetail(){
-  document.getElementById('noteDetailView').classList.remove('active');
-}
-function toggleCheck(el){
-  el.classList.toggle('checked');
-}
-
-/* 시계 탭 전환 및 스톱워치 */
-function switchClockTab(tabId, btn){
-  document.querySelectorAll('.clock-content').forEach(el=>el.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  document.querySelectorAll('.clock-tab').forEach(el=>el.classList.remove('active'));
-  btn.classList.add('active');
-}
-let swTimer=null, swTime=0;
-function toggleSW(){
-  let btn = document.getElementById('swStartBtn');
-  if(swTimer){
-    clearInterval(swTimer); swTimer=null;
-    btn.innerText='시작'; btn.style.background='#1c3d22'; btn.style.color='#30d158';
-  }else{
-    swTimer = setInterval(()=>{
-      swTime += 10;
-      let ms = Math.floor((swTime%1000)/10).toString().padStart(2,'0');
-      let s = Math.floor((swTime/1000)%60).toString().padStart(2,'0');
-      let m = Math.floor(swTime/60000).toString().padStart(2,'0');
-      document.getElementById('swDisplay').innerText = `${m}:${s}.${ms}`;
-    }, 10);
-    btn.innerText='중단'; btn.style.background='#3d1c1c'; btn.style.color='#ff453a';
-  }
-}
-function resetSW(){
-  if(!swTimer){ swTime=0; document.getElementById('swDisplay').innerText='00:00.00'; }
-}
-
-/* 카메라 기능 */
-let cameraStream=null;
-async function startCamera(){
-  try{
-    cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
-    document.querySelector('#camera video').srcObject=cameraStream;
-  }catch(e){}
-}
-function stopCamera(){
-  if(cameraStream){ cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
-}
-function takePhoto(){ alert('📸 사진이 촬영되었습니다.'); }
-
-/* 카카오톡 */
-function sendKatalk(){
-  let input = document.getElementById('katalkInput'), val = input.value.trim();
-  if(!val) return;
-  let bubble = document.createElement('div');
-  bubble.className = 'bubble mine'; bubble.textContent = val;
-  document.getElementById('katalkChat').appendChild(bubble);
-  input.value = '';
-}
-
-function updateClock(){
-  let d=new Date(), t=d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
-  document.getElementById('clock').textContent=t;
-  document.getElementById('statusTime').textContent=t;
-  document.getElementById('date').textContent=d.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
-}
-updateClock(); setInterval(updateClock,10000);
-</script></body></html>
+.alarm-time { font
