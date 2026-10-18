@@ -21,7 +21,6 @@
             overflow: hidden;
         }
 
-        /* 아이폰 외형 프레임 */
         .iphone-frame {
             width: 390px;
             height: 844px;
@@ -35,7 +34,6 @@
             border: 12px solid #2b2b2b;
         }
 
-        /* 다이내믹 아일랜드 & 상태바 */
         .status-bar {
             height: 44px;
             display: flex;
@@ -45,29 +43,13 @@
             color: #fff;
             font-size: 14px;
             font-weight: 600;
-            z-index: 2000;
+            z-index: 4000;
             position: absolute;
             top: 0;
             width: 100%;
             pointer-events: none;
         }
 
-/* 1. 잠금화면 및 패스코드 보정 */
-.lockscreen { position: absolute; inset: 0; background: linear-gradient(200deg, #0f2027, #203a43, #2c5364); z-index: 500; display: flex; flex-direction: column; padding: 60px 24px 40px; color: #fff; transition: transform 0.4s ease-out; cursor: pointer; }
-.lockscreen.hide { transform: translateY(-100%); pointer-events: none; }
-.lock-time { font-size: 64px; font-weight: 200; text-align: center; margin-bottom: 2px; }
-.lock-date { font-size: 18px; font-weight: 400; text-align: center; opacity: 0.9; margin-bottom: auto; }
-.swipe-up-hint { text-align: center; font-size: 13px; animation: bounce 2s infinite; opacity: 0.8; margin-bottom: 20px; font-weight: bold; color: #ff9f0a; }
-@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px); } 60% { transform: translateY(-4px); } }
-.passcode-screen { position: absolute; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 501; display: none; flex-direction: column; align-items: center; justify-content: center; color: white; }
-.passcode-screen.active { display: flex; }
-.passcode-dots { display: flex; gap: 16px; margin: 24px 0 40px; }
-.dot { width: 12px; height: 12px; border: 1.5px solid #fff; border-radius: 50%; transition: background 0.1s; }
-.dot.filled { background: #fff; }
-.passcode-grid { display: grid; grid-template-columns: repeat(3, 72px); gap: 16px 20px; }
-.passcode-btn { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 0; color: #fff; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.passcode-btn:active { background: rgba(255,255,255,0.4); }
-        
         .dynamic-island {
             width: 110px;
             height: 28px;
@@ -79,7 +61,6 @@
             transform: translateX(-50%);
         }
 
-        /* 공통 화면 스타일 */
         .screen {
             position: absolute;
             top: 0;
@@ -91,7 +72,7 @@
             transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
-        /* 1. 잠금 화면 */
+        /* 잠금 화면 */
         #lockScreen {
             background: url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80') no-repeat center center/cover;
             justify-content: space-between;
@@ -121,7 +102,53 @@
             margin: 0 auto;
         }
 
-        /* 2. 홈 화면 */
+        /* 비밀번호 입력 화면 */
+        #passcodeScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 20, 30, 0.92);
+            backdrop-filter: blur(25px);
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .pass-dots {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0 10px 0;
+            font-size: 24px;
+            letter-spacing: 5px;
+        }
+        .pass-keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 240px;
+            margin-top: 20px;
+        }
+        .pass-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+        .pass-btn:active { background: rgba(255, 255, 255, 0.4); }
+
+        /* 홈 화면 */
         #homeScreen {
             background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80') no-repeat center center/cover;
             padding: 55px 20px 20px 20px;
@@ -186,7 +213,6 @@
             font-weight: 500;
         }
 
-        /* 독 바 */
         .dock-bar {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(25px);
@@ -204,10 +230,9 @@
             border-radius: 3px;
             margin: 6px auto 0 auto;
             cursor: pointer;
-            z-index: 2001;
+            z-index: 4001;
         }
 
-        /* 앱 내부 윈도우 공통 */
         .app-window {
             position: absolute;
             top: 0;
@@ -215,7 +240,7 @@
             width: 100%;
             height: 100%;
             background-color: #f2f2f7;
-            z-index: 1500;
+            z-index: 2000;
             display: none;
             flex-direction: column;
             animation: slideUp 0.3s ease-in-out;
@@ -242,7 +267,6 @@
         .back-btn { color: #007aff; cursor: pointer; font-size: 15px; }
         .app-content { flex: 1; overflow-y: auto; padding: 15px; color: #1c1c1e; }
 
-        /* 하단 앱 탭바 공통 */
         .sub-tab-bar {
             height: 60px;
             background: #f8f8f8;
@@ -254,82 +278,92 @@
             color: #666;
         }
         .sub-tab { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
-        .sub-tab.active { color: #ff9500; }
-        .sub-tab img, .sub-tab span { font-size: 18px; }
+        .sub-tab.active { color: #007aff; }
 
-        /* 시계 세부 스타일 */
-        .clock-view, .phone-view { display: none; flex: 1; flex-direction: column; }
-        .clock-view.active, .phone-view.active { display: flex; }
-        .alarm-item { display: flex; justify-content: space-between; align-items: center; background: #1c1c1e; color: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; }
-        
-        /* 스위치 토글 */
-        .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #3a3a3c; transition: .4s; border-radius: 28px; }
-        .slider:before { position: absolute; content: ""; height: 24px; width: 24px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #34c759; }
-        input:checked + .slider:before { transform: translateX(22px); }
+        .phone-view { display: none; flex: 1; flex-direction: column; }
+        .phone-view.active { display: flex; }
 
-        /* 캘린더 스타일 */
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 6px; margin-top: 10px; }
-        .cal-day-header { font-size: 13px; font-weight: bold; color: #8e8e93; padding-bottom: 5px; }
-        .cal-date { height: 36px; display: flex; align-items: center; justify-content: center; font-size: 14px; border-radius: 50%; cursor: pointer; }
-        .cal-date.selected { background: #ff3b30; color: white; font-weight: bold; }
-        .cal-date.has-event::after { content: ''; display: block; width: 4px; height: 4px; background: #ff3b30; border-radius: 50%; position: absolute; bottom: 4px; }
+        .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 250px; margin: 0 auto; }
+        .key-btn { width: 65px; height: 65px; background: #e5e5ea; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 22px; font-weight: 500; cursor: pointer; margin: 0 auto; }
+        .key-btn span { font-size: 9px; color: #666; font-weight: bold; }
 
-        /* 전화 키패드 스타일 */
-        .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 260px; margin: 0 auto; }
-        .key-btn { width: 70px; height: 70px; background: #e5e5ea; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 24px; font-weight: 500; cursor: pointer; margin: 0 auto; }
-        .key-btn span { font-size: 10px; color: #666; font-weight: bold; }
+        /* 통화 중 화면 스타일 */
+        #activeCallScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1c1c1e;
+            z-index: 3500;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 70px 25px 40px 25px;
+            color: white;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
     <div class="iphone-frame">
-        <!-- 상태바 -->
         <div class="status-bar">
-            <span>10:33</span>
+            <span>10:43</span>
             <div class="dynamic-island"></div>
-            <span>5G 🔋 57%</span>
+            <span>5G 🔋 56%</span>
         </div>
 
         <!-- 1. 잠금 화면 -->
-        <div id="lockScreen" class="screen" onclick="unlockPhone()">
+        <div id="lockScreen" class="screen" onclick="showPasscodeScreen()">
             <div>
                 <div class="lock-date">10월 18일 일요일</div>
-                <div class="lock-time">10:33</div>
+                <div class="lock-time">10:43</div>
             </div>
             <div class="unlock-text">화면을 눌러 잠금 해제</div>
+        </div>
+
+        <!-- 비밀번호 입력 화면 -->
+        <div id="passcodeScreen">
+            <div style="font-size:16px; font-weight:500;">암호 입력 (010913)</div>
+            <div id="passDots" class="pass-dots">⚪ ⚪ ⚪ ⚪ ⚪ ⚪</div>
+            <div id="passError" style="color: #ff3b30; height: 20px; font-size: 13px;"></div>
+            <div class="pass-keypad">
+                <button class="pass-btn" onclick="pressPass('1')">1</button>
+                <button class="pass-btn" onclick="pressPass('2')">2</button>
+                <button class="pass-btn" onclick="pressPass('3')">3</button>
+                <button class="pass-btn" onclick="pressPass('4')">4</button>
+                <button class="pass-btn" onclick="pressPass('5')">5</button>
+                <button class="pass-btn" onclick="pressPass('6')">6</button>
+                <button class="pass-btn" onclick="pressPass('7')">7</button>
+                <button class="pass-btn" onclick="pressPass('8')">8</button>
+                <button class="pass-btn" onclick="pressPass('9')">9</button>
+                <button class="pass-btn" onclick="clearPass()" style="font-size:16px;">지우기</button>
+                <button class="pass-btn" onclick="pressPass('0')">0</button>
+                <button class="pass-btn" onclick="submitPass()" style="font-size:16px;">확인</button>
+            </div>
         </div>
 
         <!-- 2. 홈 화면 -->
         <div id="homeScreen" class="screen" style="display: none;">
             <div style="margin-top: 35px;">
                 <div class="widget-box">
-                    <div class="battery-circle">57%</div>
+                    <div class="battery-circle">56%</div>
                     <div>
                         <div style="font-size: 13px; opacity: 0.8;">송은석의 iPhone</div>
-                        <div style="font-size: 15px; font-weight: 600;">최적 상태 유지 중</div>
+                        <div style="font-size: 15px; font-weight: 600;">안전하게 보호됨</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 앱 그리드 -->
             <div class="app-grid">
-                <div class="app-item" onclick="openApp('clockApp')">
-                    <div class="app-icon" style="background:#000; color:#fff; font-size:24px;">⏰</div>
-                    <div class="app-name">시계</div>
+                <div class="app-item" onclick="openApp('phoneApp')">
+                    <div class="app-icon" style="background:#34c759; color:white;">📞</div>
+                    <div class="app-name">전화</div>
                 </div>
-                <div class="app-item" onclick="openApp('calendarApp')">
-                    <div class="app-icon" style="background:#fff; color:#ff3b30; text-align:center;">
-                        <span style="font-size:10px; display:block; margin-top:4px;">10월</span>
-                        <span style="font-size:22px; font-weight:bold; color:#000;">18</span>
-                    </div>
-                    <div class="app-name">캘린더</div>
-                </div>
-                <div class="app-item" onclick="openApp('naverApp')">
-                    <div class="app-icon" style="background:#03c75a; color:white; font-weight:bold; font-size:26px;">N</div>
-                    <div class="app-name">NAVER</div>
+                <div class="app-item" onclick="openApp('messagesApp')">
+                    <div class="app-icon" style="background:#34c759; color:white;">💬</div>
+                    <div class="app-name">메시지</div>
                 </div>
                 <div class="app-item" onclick="openApp('photosApp')">
                     <div class="app-icon" style="background:linear-gradient(135deg,#ff9500,#ff2d55); color:white;">🖼️</div>
@@ -339,17 +373,8 @@
                     <div class="app-icon" style="background:linear-gradient(135deg,#ffcc00,#ff9500); color:white;">📝</div>
                     <div class="app-name">메모</div>
                 </div>
-                <div class="app-item" onclick="openApp('youtubeApp')">
-                    <div class="app-icon" style="background:#ff0000; color:white;">▶</div>
-                    <div class="app-name">YouTube</div>
-                </div>
-                <div class="app-item" onclick="openApp('kakaotalkApp')">
-                    <div class="app-icon" style="background:#fee500; color:#3c1e1e;">💬</div>
-                    <div class="app-name">카카오톡</div>
-                </div>
             </div>
 
-            <!-- 독 바 -->
             <div class="dock-bar">
                 <div class="app-item" onclick="openApp('phoneApp')">
                     <div class="app-icon" style="background:#34c759; color:white; width:52px; height:52px; font-size:22px;">📞</div>
@@ -365,144 +390,59 @@
 
         <div class="home-indicator" onclick="goHome()"></div>
 
-        <!---------------- APP 1: 시계 앱 ---------------->
-        <div id="clockApp" class="app-window">
-            <div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span id="clockTitle">세계 시계</span><span>+</span></div>
-            <div class="app-content" style="background:#000; color:white; padding:15px;">
-                <!-- 1. 세계 시계 -->
-                <div id="tab-world" class="clock-view active">
-                    <h2 style="font-size:28px; margin-bottom:15px;">세계 시계</h2>
-                    <hr style="border-color:#333; margin-bottom:15px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div><div style="color:#aaa; font-size:14px;">오늘, +0시간</div><div style="font-size:24px; font-weight:bold;">서울</div></div>
-                        <div style="font-size:32px; font-weight:300;">오전 10:33</div>
-                    </div>
-                </div>
-                <!-- 2. 알람 -->
-                <div id="tab-alarm" class="clock-view">
-                    <h2 style="font-size:24px; margin-bottom:10px;">알람</h2>
-                    <div class="alarm-item"><div><div style="font-size:32px; font-weight:300;">오전 9:00</div><div style="color:#aaa; font-size:12px;">알람</div></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                    <div class="alarm-item"><div><div style="font-size:32px; font-weight:300;">오전 9:30</div><div style="color:#aaa; font-size:12px;">알람</div></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                    <div class="alarm-item"><div><div style="font-size:32px; font-weight:300;">오전 10:00</div><div style="color:#aaa; font-size:12px;">알람</div></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                </div>
-                <!-- 3. 스톱워치 -->
-                <div id="tab-stopwatch" class="clock-view" style="align-items:center; justify-content:center; text-align:center;">
-                    <div style="font-size:56px; font-weight:200; font-family:monospace; margin-bottom:30px;" id="stopwatchDisplay">00:00.00</div>
-                    <div style="display:flex; gap:100px;">
-                        <button onclick="alert('랩 기록됨')" style="width:70px; height:70px; border-radius:50%; background:#2c2c2e; color:white; border:none; font-size:16px;">랩</button>
-                        <button onclick="toggleStopwatch()" id="swStartBtn" style="width:70px; height:70px; border-radius:50%; background:#30d158; color:white; border:none; font-size:16px;">시작</button>
-                    </div>
-                </div>
-                <!-- 4. 타이머 -->
-                <div id="tab-timer" class="clock-view" style="align-items:center; justify-content:center; text-align:center;">
-                    <div style="font-size:40px; font-weight:300; margin-bottom:20px;">0시간 27분 0초</div>
-                    <button onclick="alert('타이머가 시작되었습니다!')" style="width:80px; height:80px; border-radius:50%; background:#30d158; color:white; border:none; font-size:18px;">시작</button>
-                </div>
-            </div>
-            <div class="sub-tab-bar" style="background:#1c1c1e; color:#aaa; border-top:1px solid #333;">
-                <div class="sub-tab active" onclick="switchClockTab('world', this)">🌐<span>세계 시계</span></div>
-                <div class="sub-tab" onclick="switchClockTab('alarm', this)">⏰<span>알람</span></div>
-                <div class="sub-tab" onclick="switchClockTab('stopwatch', this)">⏱️<span>스톱워치</span></div>
-                <div class="sub-tab" onclick="switchClockTab('timer', this)">⏳<span>타이머</span></div>
-            </div>
-        </div>
-
-        <!---------------- APP 2: 캘린더 앱 (월 넘기기 기능 포함) ---------------->
-        <div id="calendarApp" class="app-window">
+        <!---------------- 전화 앱 (사진 스타일 반영) ---------------->
+        <div id="phoneApp" class="app-window">
             <div class="app-header">
                 <span class="back-btn" onclick="goHome()">‹ 홈</span>
-                <div><button onclick="changeMonth(-1)" style="border:none; background:none; font-size:16px; cursor:pointer;">◀</button> <span id="calMonthTitle" style="margin:0 10px;">2026년 10월</span> <button onclick="changeMonth(1)" style="border:none; background:none; font-size:16px; cursor:pointer;">▶</button></div>
-                <span></span>
+                <span id="phoneHeaderTitle" style="font-weight:bold;">통화</span>
+                <span style="color:#007aff; font-size:15px; cursor:pointer;" onclick="alert('편집 모드')">편집</span>
             </div>
-            <div class="app-content" style="background:white;">
-                <div class="calendar-grid" style="border-bottom:1px solid #eee; padding-bottom:8px;">
-                    <div class="cal-day-header" style="color:red;">일</div><div class="cal-day-header">월</div><div class="cal-day-header">화</div><div class="cal-day-header">수</div><div class="cal-day-header">목</div><div class="cal-day-header">금</div><div class="cal-day-header" style="color:007aff;">토</div>
-                </div>
-                <div id="calendarDaysGrid" class="calendar-grid" style="margin-top:10px;"></div>
-                <div style="margin-top:20px; background:#f2f2f7; padding:15px; border-radius:12px;">
-                    <h4 style="font-size:14px; color:#ff3b30;">📌 선택한 날짜 일정</h4>
-                    <p id="calEventText" style="font-size:13px; color:#333; margin-top:5px;">10월 18일: 작품집 및 러프펜슬 설정집 뒷표지 마감</p>
-                </div>
-            </div>
-        </div>
 
-        <!---------------- APP 3: NAVER 앱 (검색 화면 구현) ---------------->
-        <div id="naverApp" class="app-window">
-            <div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span style="color:#03c75a; font-weight:bold;">NAVER</span><span></span></div>
-            <!-- 네이버 메인 -->
-            <div id="naverMain" class="app-content" style="background:#f5f6f8; padding:10px;">
-                <div style="background:white; border-radius:30px; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 6px rgba(0,0,0,0.05); cursor:pointer;" onclick="openNaverSearch()">
-                    <div style="display:flex; align-items:center; gap:10px;"><span style="background:#03c75a; color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">N</span><span style="color:#888; font-size:14px;">검색어 또는 URL 입력</span></div>
-                    <span>🔍</span>
-                </div>
-                <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-top:15px;">
-                    <div style="background:white; padding:12px; border-radius:12px;"><strong>강풍주의보</strong><p style="font-size:12px; color:#666;">울산시 성안동</p></div>
-                    <div style="background:white; padding:12px; border-radius:12px;"><strong>비 21.9°</strong><p style="font-size:12px; color:#666;">초단기강수예측</p></div>
-                </div>
-            </div>
-            <!-- 네이버 검색 입력창 클릭 시 화면 -->
-            <div id="naverSearchSub" class="app-content" style="background:white; display:none; padding:15px;">
-                <div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid #ddd; padding-bottom:10px;">
-                    <span onclick="closeNaverSearch()" style="cursor:pointer; font-size:18px;">←</span>
-                    <input type="text" value="성찬" style="border:none; font-size:16px; outline:none; flex:1;">
-                    <span style="color:#03c75a; font-weight:bold;">검색</span>
-                </div>
-                <div style="margin-top:15px;">
-                    <div style="font-size:13px; color:#888; margin-bottom:10px;">최근 검색어</div>
-                    <div style="padding:8px 0; border-bottom:1px solid #f2f2f7;">🔍 아부라소바 맛집 리스트 <span style="float:right; color:#ccc;">✕</span></div>
-                    <div style="padding:8px 0; border-bottom:1px solid #f2f2f7;">🔍 성찬 배우 <span style="float:right; color:#ccc;">✕</span></div>
-                    <div style="padding:8px 0; border-bottom:1px solid #f2f2f7;">🔍 팬미팅 준비물 <span style="float:right; color:#ccc;">✕</span></div>
-                    <div style="padding:8px 0; border-bottom:1px solid #f2f2f7;">🔍 정성찬 <span style="float:right; color:#ccc;">✕</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!---------------- APP 4: 전화 앱 (요청 인물 반영) ---------------->
-        <div id="phoneApp" class="app-window">
-            <div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span id="phoneTitle">통화</span><span style="font-weight:normal; color:#007aff; cursor:pointer;" onclick="alert('편집 모드')">편집</span></div>
-            
-            <!-- 통화 탭 -->
+            <!-- 통화 탭 (즐겨찾기 카드 스타일) -->
             <div id="phone-tab-recents" class="phone-view active app-content" style="padding:15px;">
-                <!-- 상단 즐겨찾기 (요청대로 이소희, 이찬영) -->
                 <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:center;">
-                    <div style="text-align:center; cursor:pointer;" onclick="alert('이소희에게 통화 연결 중...')">
-                        <div style="width:75px; height:75px; background:#d1d1d6; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:#fff;">소희</div>
-                        <div style="font-size:13px; margin-top:5px; font-weight:500;">이소희</div>
+                    <div style="text-align:center; cursor:pointer;" onclick="startCall('이소희')">
+                        <div style="width:75px; height:75px; background:#aeaeb2; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:bold; color:#fff;">이소희</div>
+                        <div style="font-size:13px; margin-top:6px; font-weight:500;">이소희</div>
                     </div>
-                    <div style="text-align:center; cursor:pointer;" onclick="alert('이찬영에게 통화 연결 중...')">
-                        <div style="width:75px; height:75px; background:#d1d1d6; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:#fff;">찬영</div>
-                        <div style="font-size:13px; margin-top:5px; font-weight:500;">이찬영</div>
+                    <div style="text-align:center; cursor:pointer;" onclick="startCall('이찬영')">
+                        <div style="width:75px; height:75px; background:#aeaeb2; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:bold; color:#fff;">이찬영</div>
+                        <div style="font-size:13px; margin-top:6px; font-weight:500;">이찬영</div>
                     </div>
                 </div>
-                <div style="font-size:16px; font-weight:bold; margin-bottom:10px;">최근 통화</div>
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;" onclick="alert('박원빈에게 전화 거는 중...')">
+                <div style="font-size:18px; font-weight:bold; margin-bottom:12px;">최근 통화</div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('엄마')">
+                    <div><strong>엄마</strong><div style="font-size:12px; color:gray;">휴대전화</div></div>
+                    <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:12px; color:gray;">오후 6:15</span><span style="color:#007aff; font-size:18px;">📞</span></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('아빠')">
+                    <div><strong>아빠</strong><div style="font-size:12px; color:gray;">휴대전화 (2)</div></div>
+                    <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:12px; color:gray;">오후 4:07</span><span style="color:#007aff; font-size:18px;">📞</span></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('박원빈')">
                     <div><strong>박원빈</strong><div style="font-size:12px; color:gray;">휴대전화</div></div>
-                    <span style="color:#007aff; font-size:18px;">📞</span>
+                    <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:12px; color:gray;">어제</span><span style="color:#007aff; font-size:18px;">📞</span></div>
                 </div>
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;" onclick="alert('쇼타로에게 전화 거는 중...')">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('쇼타로')">
                     <div><strong>쇼타로</strong><div style="font-size:12px; color:gray;">휴대전화</div></div>
-                    <span style="color:#007aff; font-size:18px;">📞</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;" onclick="alert('형에게 전화 거는 중...')">
-                    <div><strong>형</strong><div style="font-size:12px; color:gray;">휴대전화</div></div>
-                    <span style="color:#007aff; font-size:18px;">📞</span>
+                    <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:12px; color:gray;">그저께</span><span style="color:#007aff; font-size:18px;">📞</span></div>
                 </div>
             </div>
 
             <!-- 연락처 탭 -->
             <div id="phone-tab-contacts" class="phone-view app-content" style="padding:15px;">
-                <h3 style="margin-bottom:15px;">연락처 목록</h3>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>곽동영</strong></div>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>이소희</strong></div>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>이찬영</strong></div>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>박원빈</strong></div>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>쇼타로</strong></div>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>형</strong></div>
+                <h3 style="margin-bottom:15px;">연락처</h3>
+                <div style="padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('곽동영')"><strong>곽동영</strong></div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('이소희')"><strong>이소희</strong></div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('이찬영')"><strong>이찬영</strong></div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('박원빈')"><strong>박원빈</strong></div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('쇼타로')"><strong>쇼타로</strong></div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee; cursor:pointer;" onclick="startCall('형')"><strong>형</strong></div>
             </div>
 
-            <!-- 키패드 탭 -->
+            <!-- 키패드 탭 (미리 010 안 적혀 있음, 1# 누르면 아빠 호출) -->
             <div id="phone-tab-keypad" class="phone-view app-content" style="display:none; flex-direction:column; justify-content:center; align-items:center;">
-                <div id="dialNumber" style="font-size:28px; font-weight:300; margin-bottom:20px; height:35px;">010-</div>
+                <div id="dialNumber" style="font-size:28px; font-weight:300; margin-bottom:20px; height:35px; letter-spacing:2px;"></div>
                 <div class="keypad-grid">
                     <div class="key-btn" onclick="pressKey('1')">1</div>
                     <div class="key-btn" onclick="pressKey('2')">2<span>ABC</span></div>
@@ -517,7 +457,7 @@
                     <div class="key-btn" onclick="pressKey('0')">0<span>+</span></div>
                     <div class="key-btn" onclick="pressKey('#')">#</div>
                 </div>
-                <div style="margin-top:20px; width:60px; height:60px; background:#34c759; border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-size:24px; cursor:pointer;" onclick="alert('통화 연결 중...')">📞</div>
+                <div style="margin-top:20px; width:60px; height:60px; background:#34c759; border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-size:24px; cursor:pointer;" onclick="checkDialCall()">📞</div>
             </div>
 
             <div class="sub-tab-bar">
@@ -527,21 +467,72 @@
             </div>
         </div>
 
-        <!-- 기타 기본 앱 (사진, 메모, 유튜브, 카카오톡, 메시지, 인스타) -->
-        <div id="photosApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>사진</span></div><div class="app-content"><p style="text-align:center; color:#666; margin-top:50px;">송은석의 갤러리 앨범입니다.</p></div></div>
-        <div id="notesApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>메모</span></div><div class="app-content"><p style="padding:10px;">☑ 칫솔 및 세면도구<br>☑ C타입 충전기<br>☑ 여벌 옷</p></div></div>
-        <div id="youtubeApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>YouTube</span></div><div class="app-content"><p style="text-align:center; color:#666; margin-top:50px;">YouTube 시청 기록</p></div></div>
-        <div id="kakaotalkApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>카카오톡</span></div><div class="app-content"><p style="padding:10px;">[아버지] 은석아 집 도착했다~</p></div></div>
+        <!-- 통화 중 화면 (Active Call Screen) -->
+        <div id="activeCallScreen">
+            <div>
+                <div id="callTimer" style="font-size:15px; color:#aaa;">00:00</div>
+                <h2 id="activeCallerName" style="font-size:32px; margin-top:10px; font-weight:500;">이름</h2>
+                <p style="font-size:14px; color:#30d158; margin-top:5px;">통화 중...</p>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; max-width:280px; margin:0 auto;">
+                <div style="font-size:12px; color:#ccc;"><div style="width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 6px auto;">🔊</div>스피커</div>
+                <div style="font-size:12px; color:#ccc;"><div style="width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 6px auto;">📹</div>FaceTime</div>
+                <div style="font-size:12px; color:#ccc;"><div style="width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 6px auto;">🔇</div>소리 끔</div>
+                <div style="font-size:12px; color:#ccc;"><div style="width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 6px auto;">⌨️</div>키패드</div>
+                <div onclick="endCall()" style="width:70px; height:70px; background:#ff3b30; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; cursor:pointer; grid-column: 2;">📞</div>
+                <div style="font-size:12px; color:#ccc;"><div style="width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 6px auto;">➕</div>통화 추가</div>
+            </div>
+        </div>
+
+        <!-- 기타 앱 샘플 -->
         <div id="messagesApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>메시지</span></div><div class="app-content"><p style="padding:10px;">[Web발신] 택배 배송 완료</p></div></div>
+        <div id="photosApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>사진</span></div><div class="app-content"><p style="text-align:center; color:#666; margin-top:50px;">송은석의 갤러리 앨범</p></div></div>
+        <div id="notesApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>메모</span></div><div class="app-content"><p style="padding:10px;">☑ 칫솔 및 세면도구<br>☑ C타입 충전기</p></div></div>
         <div id="instaApp" class="app-window"><div class="app-header"><span class="back-btn" onclick="goHome()">‹ 홈</span><span>인스타그램</span></div><div class="app-content"><p style="text-align:center; color:#666; margin-top:50px;">@euns.eoooook 피드</p></div></div>
 
     </div>
 
     <script>
-        function unlockPhone() {
-            document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
-            document.getElementById('lockScreen').style.opacity = '0';
-            document.getElementById('homeScreen').style.display = 'flex';
+        // 잠금 및 비밀번호 로직
+        let enteredPass = "";
+        const correctPass = "010913";
+
+        function showPasscodeScreen() {
+            document.getElementById('passcodeScreen').style.display = 'flex';
+        }
+
+        function pressPass(num) {
+            if (enteredPass.length < 6) {
+                enteredPass += num;
+                updatePassDots();
+            }
+        }
+
+        function clearPass() {
+            enteredPass = "";
+            updatePassDots();
+            document.getElementById('passError').innerText = "";
+        }
+
+        function updatePassDots() {
+            let dots = "";
+            for (let i = 0; i < 6; i++) {
+                dots += i < enteredPass.length ? "🟢 " : "⚪ ";
+            }
+            document.getElementById('passDots').innerText = dots.trim();
+        }
+
+        function submitPass() {
+            if (enteredPass === correctPass) {
+                document.getElementById('passcodeScreen').style.display = 'none';
+                document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
+                document.getElementById('lockScreen').style.opacity = '0';
+                document.getElementById('homeScreen').style.display = 'flex';
+            } else {
+                document.getElementById('passError').innerText = "비밀번호가 틀렸습니다";
+                enteredPass = "";
+                updatePassDots();
+            }
         }
 
         function openApp(appId) {
@@ -550,81 +541,7 @@
 
         function goHome() {
             document.querySelectorAll('.app-window').forEach(win => win.style.display = 'none');
-        }
-
-        // 시계 앱 탭 전환
-        function switchClockTab(tabName, el) {
-            document.querySelectorAll('.clock-view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('#clockApp .sub-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab-' + tabName).classList.add('active');
-            el.classList.add('active');
-            const titles = { world: '세계 시계', alarm: '알람', stopwatch: '스톱워치', timer: '타이머' };
-            document.getElementById('clockTitle').innerText = titles[tabName];
-        }
-
-        // 스톱워치 기능
-        let swRunning = false, swSeconds = 0, swInterval;
-        function toggleStopwatch() {
-            const btn = document.getElementById('swStartBtn');
-            if (!swRunning) {
-                swRunning = true;
-                btn.innerText = '중단';
-                btn.style.background = '#ff453a';
-                swInterval = setInterval(() => {
-                    swSeconds += 0.01;
-                    let m = Math.floor(swSeconds / 60).toString().padStart(2, '0');
-                    let s = Math.floor(swSeconds % 60).toString().padStart(2, '0');
-                    let ms = Math.floor((swSeconds % 1) * 100).toString().padStart(2, '0');
-                    document.getElementById('stopwatchDisplay').innerText = `${m}:${s}.${ms}`;
-                }, 10);
-            } else {
-                swRunning = false;
-                btn.innerText = '시작';
-                btn.style.background = '#30d158';
-                clearInterval(swInterval);
-            }
-        }
-
-        // 캘린더 월 이동 기능
-        let currentMonth = 10, currentYear = 2026;
-        function renderCalendar() {
-            document.getElementById('calMonthTitle').innerText = `${currentYear}년 ${currentMonth}월`;
-            const grid = document.getElementById('calendarDaysGrid');
-            grid.innerHTML = '';
-            // 간단 캘린더 날짜 렌더링
-            let totalDays = 31;
-            if (currentMonth === 4 || currentMonth === 6 || currentMonth === 9 || currentMonth === 11) totalDays = 30;
-            if (currentMonth === 2) totalDays = 28;
-
-            for (let i = 1; i <= totalDays; i++) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'cal-date';
-                if (currentMonth === 10 && i === 18) dayDiv.classList.add('selected');
-                dayDiv.innerText = i;
-                dayDiv.onclick = () => {
-                    document.querySelectorAll('.cal-date').forEach(d => d.classList.remove('selected'));
-                    dayDiv.classList.add('selected');
-                    document.getElementById('calEventText').innerText = `${currentMonth}월 ${i}일 일정: 개인 작업 및 휴식`;
-                };
-                grid.appendChild(dayDiv);
-            }
-        }
-        function changeMonth(direction) {
-            currentMonth += direction;
-            if (currentMonth > 12) { currentMonth = 1; currentYear++; }
-            if (currentMonth < 1) { currentMonth = 12; currentYear--; }
-            renderCalendar();
-        }
-        renderCalendar();
-
-        // 네이버 검색창 전환
-        function openNaverSearch() {
-            document.getElementById('naverMain').style.display = 'none';
-            document.getElementById('naverSearchSub').style.display = 'block';
-        }
-        function closeNaverSearch() {
-            document.getElementById('naverSearchSub').style.display = 'none';
-            document.getElementById('naverMain').style.display = 'block';
+            endCall();
         }
 
         // 전화 앱 탭 전환
@@ -633,20 +550,48 @@
             document.querySelectorAll('#phoneApp .sub-tab').forEach(t => t.classList.remove('active'));
             if (tabName === 'recents') document.getElementById('phone-tab-recents').classList.add('active');
             if (tabName === 'contacts') document.getElementById('phone-tab-contacts').classList.add('active');
-            if (tabName === 'keypad') {
-                const kp = document.getElementById('phone-tab-keypad');
-                kp.style.display = 'flex';
-                kp.classList.add('active');
-            } else {
-                document.getElementById('phone-tab-keypad').style.display = 'none';
-            }
+            if (tabName === 'keypad') document.getElementById('phone-tab-keypad').classList.add('active');
             el.classList.add('active');
-            document.getElementById('phoneTitle').innerText = title;
+            document.getElementById('phoneHeaderTitle').innerText = title;
         }
 
+        // 키패드 입력 및 1# 아빠 호출 로직
+        let dialInput = '';
         function pressKey(num) {
-            const dn = document.getElementById('dialNumber');
-            dn.innerText += num;
+            dialInput += num;
+            document.getElementById('dialNumber').innerText = dialInput;
+        }
+
+        function checkDialCall() {
+            if (dialInput === '1#') {
+                startCall('아빠');
+            } else {
+                startCall(dialInput || '알 수 없는 번호');
+            }
+            dialInput = '';
+            document.getElementById('dialNumber').innerText = '';
+        }
+
+        // 통화 시작 및 타이머
+        let callTimerInterval;
+        let callSeconds = 0;
+
+        function startCall(name) {
+            document.getElementById('activeCallerName').innerText = name;
+            document.getElementById('activeCallScreen').style.display = 'flex';
+            callSeconds = 0;
+            document.getElementById('callTimer').innerText = "00:00";
+            callTimerInterval = setInterval(() => {
+                callSeconds++;
+                let m = Math.floor(callSeconds / 60).toString().padStart(2, '0');
+                let s = (callSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('callTimer').innerText = `${m}:${s}`;
+            }, 1000);
+        }
+
+        function endCall() {
+            document.getElementById('activeCallScreen').style.display = 'none';
+            clearInterval(callTimerInterval);
         }
     </script>
 </body>
